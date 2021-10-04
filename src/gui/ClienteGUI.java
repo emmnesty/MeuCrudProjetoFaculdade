@@ -21,6 +21,11 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.DropMode;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.ButtonGroup;
+import javax.swing.JScrollPane;
 
 public class ClienteGUI extends JFrame {
 	
@@ -34,6 +39,7 @@ public class ClienteGUI extends JFrame {
 	private JTextField capoTelefone;
 	private JTextField campoPesquisar;
 	private JTable table;
+	private final ButtonGroup buttonGroup = new ButtonGroup();
 
 	/**
 	 * Launch the application.
@@ -83,18 +89,30 @@ public class ClienteGUI extends JFrame {
 		panel.add(lbl1);
 		
 		campoNome = new JTextField();
+		campoNome.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		campoNome.setFont(new Font("Arial Rounded MT Bold", 1, 11));
 		campoNome.setBounds(109, 79, 171, 23);
 		contentPane.add(campoNome);
 		campoNome.setColumns(10);
 		
 		campoEmail = new JTextField();
+		campoEmail.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		campoEmail.setFont(new Font("Arial Rounded MT Bold", 1, 11));
 		campoEmail.setBounds(109, 145, 171, 25);
 		contentPane.add(campoEmail);
 		campoEmail.setColumns(10);
 		
 		capoTelefone = new JTextField();
+		capoTelefone.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		capoTelefone.setBounds(301, 79, 199, 22);
 		contentPane.add(capoTelefone);
 		capoTelefone.setColumns(10);
@@ -135,10 +153,20 @@ public class ClienteGUI extends JFrame {
 		contentPane.add(panel_2);
 		
 		JRadioButton campoMasculino = new JRadioButton("Masculino");
+		campoMasculino.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		buttonGroup.add(campoMasculino);
 		campoMasculino.setBackground(new Color(255, 255, 255));
 		panel_2.add(campoMasculino);
 		
 		JRadioButton campoFeminino = new JRadioButton("Feminino");
+		campoFeminino.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		buttonGroup.add(campoFeminino);
 		campoFeminino.setBackground(new Color(255, 255, 255));
 		panel_2.add(campoFeminino);
 		
@@ -150,11 +178,19 @@ public class ClienteGUI extends JFrame {
 		panel_1.setLayout(null);
 		
 		JButton btnSalvar = new JButton("Salvar");
+		btnSalvar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btnSalvar.setBounds(22, 11, 95, 21);
 		panel_1.add(btnSalvar);
 		btnSalvar.setFont(new Font("Arial", Font.BOLD, 11));
 		
 		JButton btnExcluir = new JButton("Excluir");
+		btnExcluir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btnExcluir.setBounds(131, 11, 86, 21);
 		panel_1.add(btnExcluir);
 		btnExcluir.setFont(new Font("Arial", Font.BOLD, 11));
@@ -179,10 +215,18 @@ public class ClienteGUI extends JFrame {
 		scrollBar.setBounds(452, 13, 17, 64);
 		panel_4.setLayout(null);
 		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(10, 13, 470, 96);
+		panel_4.add(scrollPane);
+		
 		table = new JTable();
-		table.setBounds(10, 13, 470, 96);
+		scrollPane.setViewportView(table);
+		table.setBackground(new Color(255, 255, 255));
+		table.setBorder(null);
+		table.setColumnSelectionAllowed(true);
+		table.setCellSelectionEnabled(true);
 		table.setFont(new Font("Arial", table.getFont().getStyle(), table.getFont().getSize()));
-		table.setModel(new DefaultTableModel(
+		table.setModel(new javax.swing.table.DefaultTableModel(
 			new Object[][] {
 				{null, null, null, null},
 				{null, null, null, null},
@@ -192,19 +236,13 @@ public class ClienteGUI extends JFrame {
 			new String[] {
 				"Nome", "Telefone", "E-mail", "Sexo"
 			}
-		) {
-			boolean[] columnEditables = new boolean[] {
-				false, false, false, false
-			};
-			public boolean isCellEditable(int row, int column) {
-				return columnEditables[column];
-			}
-		});
+			
+			
+		));
 		table.getColumnModel().getColumn(0).setResizable(false);
 		table.getColumnModel().getColumn(1).setResizable(false);
 		table.getColumnModel().getColumn(2).setResizable(false);
 		table.getColumnModel().getColumn(3).setResizable(false);
-		panel_4.add(table);
 		panel_4.add(scrollBar);
 	}
 }
