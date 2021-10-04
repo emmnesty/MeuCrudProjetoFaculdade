@@ -5,7 +5,10 @@ import java.awt.EventQueue;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.SystemColor;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -13,6 +16,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollBar;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
@@ -20,18 +24,16 @@ import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.DropMode;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import javax.swing.ButtonGroup;
-import javax.swing.JScrollPane;
+
+import dao.ClienteDAO;
+import utils.GerenteDeImagens;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class ClienteGUI extends JFrame {
 	
-	/*Criar Conexão DAO e Criar também o Objeto Gerente de Imagens
-	 * 
-	 */
+    GerenteDeImagens gerenteDeImagens = new GerenteDeImagens();
+    ClienteDAO clienteDAO = new ClienteDAO();
 	
 	private JPanel contentPane;	
 	private JTextField campoNome;
@@ -124,6 +126,22 @@ public class ClienteGUI extends JFrame {
 		contentPane.add(panel_3);
 		
 		JLabel campoImagemCliente = new JLabel("");
+		campoImagemCliente.addMouseListener(new MouseAdapter() {
+			/*
+			 * Aqui onde faz com que o avatar seja carregado. 
+			 * Eu fiz algo relacionando a variavel "e" que bugou o banco
+			 */
+			public void mouseClicked(MouseEvent e) {
+				{
+			        if (e.getClickCount() == 2) {
+			            gerenteDeImagens.escolherImagem(campoImagemCliente);
+
+			        }
+
+			
+			    }
+			}
+		});
 		campoImagemCliente.setHorizontalAlignment(SwingConstants.CENTER);
 		campoImagemCliente.setBackground(new Color(240, 240, 240));
 		campoImagemCliente.setIcon(new ImageIcon(ClienteGUI.class.getResource("/imgs/cliente.PNG")));
